@@ -1,0 +1,7 @@
+{
+  "name": "who-was-in-paris",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
