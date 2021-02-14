@@ -1,0 +1,7 @@
+{
+  "name": "programBytes",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
