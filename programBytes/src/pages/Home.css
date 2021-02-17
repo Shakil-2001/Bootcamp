@@ -1,5 +1,5 @@
 #header{ 
-    --background: #3171e0;
+    --background: #1e2023;
     --opacity: 0.8;
     color: white; 
     font-weight: bold;
@@ -7,15 +7,15 @@
 }
 
 #searchbarCont{
-    --background: #4c8dff;
+    --background: #92949c;
 }
 
 #searchbar{ 
-    --background: rgb(74, 130, 226);
+    --background: #9d9fa6;
 }
 
 #body{
-    --background: #4c8dff;
+    --background:#92949c;
     --opacity: 0.2; 
 }
 
@@ -23,7 +23,14 @@
     position:fixed; 
     bottom:0;
     text-align: center;
-    --background: #3171e0;
+    color:white;
+    --background: #1e2023;
     --opacity: 0.8;
 }
 
+#cards{ 
+    --background: #808289;
+    opacity: 0.8;
+    --color: white; 
+    font-weight: bold; 
+}

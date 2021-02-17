@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonFooter, IonLabel} from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonFooter, IonLabel, IonGrid, IonRow, IonCol, IonCardContent, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle} from '@ionic/react';
 import { RouteComponentProps } from 'react-router-dom';
 import './Home.css';
 
@@ -20,7 +20,106 @@ const Home: React.FC<RouteComponentProps> = (props) =>{
           <IonSearchbar id='searchbar' placeholder="Search Location..." />
         </IonToolbar>
 
-        <img src='Assets\map_image.jpg' alt='Placeholder'></img>
+      <IonGrid>
+
+
+        <IonRow> 
+
+          <IonCol> 
+            <IonCard id='cards'>
+              <IonCardHeader>
+                <IonCardTitle>Daily Corona Cases</IonCardTitle>
+              </IonCardHeader>
+
+              <IonCardContent>
+                123,456
+              </IonCardContent>
+            </IonCard>
+          </IonCol>
+
+          <IonCol> 
+            <IonCard id='cards'>
+              <IonCardHeader>
+                <IonCardTitle>Corona Cases Cured</IonCardTitle>
+              </IonCardHeader>
+
+              <IonCardContent>
+                987,654
+              </IonCardContent>
+            </IonCard>  
+          </IonCol>
+
+        </IonRow>
+
+        <IonRow> 
+
+          <IonCol> 
+            <IonCard id='cards'>
+              <IonCardHeader>
+                <IonCardTitle>Daily Corona Cases</IonCardTitle>
+              </IonCardHeader>
+
+              <IonCardContent>
+                123,456
+              </IonCardContent>
+            </IonCard>
+          </IonCol>
+
+          <IonCol> 
+            <IonCard id='cards'>
+              <IonCardHeader>
+                <IonCardTitle>Daily Corona Cases</IonCardTitle>
+              </IonCardHeader>
+              <IonCardContent>
+                123,456
+              </IonCardContent>
+            </IonCard>
+          </IonCol>
+
+          <IonCol> 
+            <IonCard id='cards'>
+              <IonCardHeader>
+                <IonCardTitle>Corona Cases Cured</IonCardTitle>
+              </IonCardHeader>
+
+              <IonCardContent>
+                987,654
+              </IonCardContent>
+            </IonCard>  
+          </IonCol>
+
+        </IonRow>
+
+        <IonRow> 
+
+          <IonCol> 
+            <IonCard id='cards'>
+              <IonCardHeader>
+                <IonCardTitle>Daily Cases</IonCardTitle>
+              </IonCardHeader>
+
+              <IonCardContent>
+                123,456
+              </IonCardContent>
+            </IonCard>
+          </IonCol>
+
+          <IonCol> 
+            <IonCard id='cards'>
+              <IonCardHeader>
+                <IonCardTitle>Cured Cases</IonCardTitle>
+              </IonCardHeader>
+
+              <IonCardContent>
+                 987,654
+              </IonCardContent>
+            </IonCard>  
+          </IonCol>
+
+        </IonRow>
+
+      </IonGrid>
+
 
       </IonContent>
 
