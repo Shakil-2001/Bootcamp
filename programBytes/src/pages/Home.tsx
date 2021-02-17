@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonFooter, IonLabel, IonGrid, IonRow, IonCol, IonCardContent, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle} from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonFooter, IonLabel, IonGrid, IonRow, IonCol, IonCardContent, IonCard, IonCardHeader, IonCardTitle} from '@ionic/react';
 import { RouteComponentProps } from 'react-router-dom';
 import './Home.css';
 
