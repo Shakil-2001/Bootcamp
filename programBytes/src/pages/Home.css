@@ -1,0 +1,29 @@
+#header{ 
+    --background: #3171e0;
+    --opacity: 0.8;
+    color: white; 
+    font-weight: bold;
+    text-align: center;
+}
+
+#searchbarCont{
+    --background: #4c8dff;
+}
+
+#searchbar{ 
+    --background: rgb(74, 130, 226);
+}
+
+#body{
+    --background: #4c8dff;
+    --opacity: 0.2; 
+}
+
+#footer{
+    position:fixed; 
+    bottom:0;
+    text-align: center;
+    --background: #3171e0;
+    --opacity: 0.8;
+}
+
