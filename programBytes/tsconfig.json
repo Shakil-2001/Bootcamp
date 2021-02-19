@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "Assets/cov.js"  ]
 }

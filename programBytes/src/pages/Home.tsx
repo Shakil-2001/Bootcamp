@@ -14,14 +14,12 @@ import {
   IonCardContent,
   IonCard,
   IonCardHeader,
-  IonCardSubtitle,
   IonCardTitle,
 } from "@ionic/react";
 import { RouteComponentProps } from "react-router-dom";
 import "./Home.css";
 import covidAPI from "../services/covidAPI";
 import React from "react";
-import { get } from "https";
 
 const Home: React.FC<RouteComponentProps> = (props) => {
 
