@@ -59,16 +59,11 @@ const Home: React.FC<RouteComponentProps> = (props) => {
         setShowAlert1(true)
       });
   });
-
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonFooter, IonLabel, IonGrid, IonRow, IonCol, IonCardContent, IonCard, IonCardHeader, IonCardTitle} from '@ionic/react';
-import { RouteComponentProps } from 'react-router-dom';
-import './Home.css';
-
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar id="header">
-          <IonTitle>Cool_Name</IonTitle>
+          <IonTitle>COVID Tracker</IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -82,7 +77,7 @@ import './Home.css';
         onDidDismiss={() => setShowAlert1(false)}
         header={'Error'}
         subHeader={'Cannot connect to server'}
-        message={'Unable to connect to the server. Please check the internet'}
+        message={'Unable to connect to the server. Please check your internet connection'}
         buttons={['OK']}
       />
 
