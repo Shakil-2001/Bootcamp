@@ -63,7 +63,7 @@ const Home: React.FC<RouteComponentProps> = (props) => {
     <IonPage>
       <IonHeader>
         <IonToolbar id="header">
-          <IonTitle>Cool_Name</IonTitle>
+          <IonTitle>COVID Tracker</IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -77,7 +77,7 @@ const Home: React.FC<RouteComponentProps> = (props) => {
         onDidDismiss={() => setShowAlert1(false)}
         header={'Error'}
         subHeader={'Cannot connect to server'}
-        message={'Unable to connect to the server. Please check the internet'}
+        message={'Unable to connect to the server. Please check your internet connection'}
         buttons={['OK']}
       />
 
