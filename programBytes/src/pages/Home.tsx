@@ -59,11 +59,6 @@ const Home: React.FC<RouteComponentProps> = (props) => {
         setShowAlert1(true)
       });
   });
-
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonFooter, IonLabel, IonGrid, IonRow, IonCol, IonCardContent, IonCard, IonCardHeader, IonCardTitle} from '@ionic/react';
-import { RouteComponentProps } from 'react-router-dom';
-import './Home.css';
-
   return (
     <IonPage>
       <IonHeader>
