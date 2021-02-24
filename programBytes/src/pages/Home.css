@@ -1,21 +1,28 @@
 #header{ 
-    --background: #1e2023;
-    --opacity: 0.8;
+    --background: #457b9d;
+    --opacity: 0.99;
     color: white; 
-    font-weight: bold;
-    text-align: center;
+}
+
+#title{ 
+    text-align: center; 
+}
+
+.button{ 
+    --background: transparent;
+    color:#1d3557;
 }
 
 #searchbarCont{
-    --background: #92949c;
+    --background: #a8dadc;
 }
 
 #searchbar{ 
-    --background: #9d9fa6;
+    --background: #f1faee;
 }
 
 #body{
-    --background:#92949c;
+    --background:#a8dadc;
     --opacity: 0.2; 
 }
 
@@ -23,14 +30,14 @@
     position:fixed; 
     bottom:0;
     text-align: center;
-    color:white;
-    --background: #1e2023;
-    --opacity: 0.8;
+    color:#1d3557;
+    --background: #457b9d;
+    --opacity: 0.99;
 }
 
 #cards{ 
-    --background: #808289;
-    opacity: 0.8;
-    --color: white; 
+    --background: #f1faee;
+    opacity: 0.90;
+    --color: #1d3557; 
     font-weight: bold; 
 }

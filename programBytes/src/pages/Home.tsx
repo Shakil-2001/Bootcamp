@@ -15,6 +15,9 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
+  IonIcon, 
+  IonButton,
+  IonItem
 } from "@ionic/react";
 
 import { RouteComponentProps } from "react-router-dom";
@@ -59,11 +62,13 @@ const Home: React.FC<RouteComponentProps> = (props) => {
         setShowAlert1(true)
       });
   });
+
   return (
+    
     <IonPage>
       <IonHeader>
         <IonToolbar id="header">
-          <IonTitle>COVID Tracker</IonTitle>
+          <IonTitle id="title">COVID Tracker</IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -79,7 +84,7 @@ const Home: React.FC<RouteComponentProps> = (props) => {
         subHeader={'Cannot connect to server'}
         message={'Unable to connect to the server. Please check your internet connection'}
         buttons={['OK']}
-      />
+        />
 
         <IonGrid>
           <IonRow>
@@ -110,28 +115,27 @@ const Home: React.FC<RouteComponentProps> = (props) => {
             <IonCol>
               <IonCard id="cards">
                 <IonCardHeader>
-                  <IonCardTitle>Placeholder</IonCardTitle>
+                  <IonCardTitle>Total Corona Deaths</IonCardTitle>
                 </IonCardHeader>
 
-                <IonCardContent>123,456</IonCardContent>
+                <IonCardContent>{cumDeaths.toLocaleString()}</IonCardContent>
               </IonCard>
             </IonCol>
 
             <IonCol>
               <IonCard id="cards">
                 <IonCardHeader>
-                  <IonCardTitle>Placeholder</IonCardTitle>
+                  <IonCardTitle>Daily Corona Deaths</IonCardTitle>
                 </IonCardHeader>
-                <IonCardContent>123,456</IonCardContent>
+                <IonCardContent>{newDeaths.toLocaleString()}</IonCardContent>
               </IonCard>
             </IonCol>
+          </IonRow>
 
+          <IonRow>
             <IonCol>
               <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Placeholder</IonCardTitle>
-                </IonCardHeader>
-
+                <IonCardHeader>Placeholder</IonCardHeader>
                 <IonCardContent>987,654</IonCardContent>
               </IonCard>
             </IonCol>
@@ -140,21 +144,42 @@ const Home: React.FC<RouteComponentProps> = (props) => {
           <IonRow>
             <IonCol>
               <IonCard id="cards">
+                <IonItem> 
+                  <IonLabel>NHS guidlines</IonLabel>
+                  <IonButton id="button" slot="end" href="https://www.nhs.uk/conditions/coronavirus-covid-19/">More Info </IonButton>
+                </IonItem>
+                <IonItem> 
+                  <IonLabel>NHS guidlines</IonLabel>
+                </IonItem>
+                <IonItem> 
+                  <IonLabel>NHS guidlines</IonLabel>
+                </IonItem>
+                <IonItem> 
+                  <IonLabel>NHS guidlines</IonLabel>
+                </IonItem>
+              
+              </IonCard>
+            </IonCol>
+          </IonRow>
+
+          <IonRow>
+            <IonCol>
+              <IonCard id="cards">
                 <IonCardHeader>
-                  <IonCardTitle>Daily Corona Deaths</IonCardTitle>
+                  <IonCardTitle>Placeholder</IonCardTitle>
                 </IonCardHeader>
 
-                <IonCardContent>{newDeaths.toLocaleString()}</IonCardContent>
+                <IonCardContent></IonCardContent>
               </IonCard>
             </IonCol>
 
             <IonCol>
               <IonCard id="cards">
                 <IonCardHeader>
-                  <IonCardTitle>Total Corona Deaths</IonCardTitle>
+                  <IonCardTitle>Placeholder</IonCardTitle>
                 </IonCardHeader>
 
-                <IonCardContent>{cumDeaths.toLocaleString()}</IonCardContent>
+                <IonCardContent></IonCardContent>
               </IonCard>
             </IonCol>
           </IonRow>
@@ -166,6 +191,7 @@ const Home: React.FC<RouteComponentProps> = (props) => {
           <IonLabel>Location set to {location}</IonLabel>
         </IonToolbar>
       </IonFooter>
+
     </IonPage>
   );
 };
