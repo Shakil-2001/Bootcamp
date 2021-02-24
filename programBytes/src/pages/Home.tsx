@@ -144,18 +144,18 @@ const Home: React.FC<RouteComponentProps> = (props) => {
           <IonRow>
             <IonCol>
               <IonCard id="cards">
-                <IonItem> 
+                <IonItem href="https://www.nhs.uk/conditions/coronavirus-covid-19/"> 
                   <IonLabel>NHS guidlines</IonLabel>
-                  <IonButton id="button" slot="end" href="https://www.nhs.uk/conditions/coronavirus-covid-19/">More Info </IonButton>
+                  <IonIcon slot="end" name="information-circle-outline"></IonIcon>
                 </IonItem>
                 <IonItem> 
-                  <IonLabel>NHS guidlines</IonLabel>
+                  <IonLabel>Almond Milk! But no Nipples?</IonLabel>
                 </IonItem>
                 <IonItem> 
-                  <IonLabel>NHS guidlines</IonLabel>
+                  <IonLabel>Amazing world of Gumbball</IonLabel>
                 </IonItem>
                 <IonItem> 
-                  <IonLabel>NHS guidlines</IonLabel>
+                  <IonLabel>cool kids only</IonLabel>
                 </IonItem>
               
               </IonCard>
