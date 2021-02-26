@@ -15,24 +15,24 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
-  IonIcon, 
+  IonIcon,
   IonButton,
-  IonItem
+  IonItem,
 } from "@ionic/react";
 
 import { RouteComponentProps } from "react-router-dom";
-import "./Home.css";
+import "./Cases.css";
 import covidAPI from "../services/covidAPI";
 import React from "react";
 
-const Home: React.FC<RouteComponentProps> = (props) => {
-
+const Home: React.FC = () => {
   const [newCases = "", setNewCases] = React.useState(String);
   const [cumCases = "", setCumCases] = React.useState(String); //haha cum lmao
   const [newDeaths = "", setNewDeaths] = React.useState(String);
   const [cumDeaths = "", setCumDeaths] = React.useState(String); ////haha cum again
   const [location = "", getLocation] = React.useState(String);
-  const [showAlert1 , setShowAlert1] = React.useState(false); // alert
+  const [showAlert1, setShowAlert1] = React.useState(false); // alert
+  const [searchText, setSearchText] = React.useState("");
 
   /* 
   If you see .toLocaleString() it basically formats the number to have the comma where ever the thousands are and shit.
@@ -59,12 +59,12 @@ const Home: React.FC<RouteComponentProps> = (props) => {
       })
       .catch((error) => {
         console.log(error);
-        setShowAlert1(true)
+        setShowAlert1(true);
       });
   });
 
   return (
-    
+
     <IonPage>
       <IonHeader>
         <IonToolbar id="header">
@@ -74,16 +74,23 @@ const Home: React.FC<RouteComponentProps> = (props) => {
 
       <IonContent id="body" fullscreen>
         <IonToolbar id="searchbarCont">
-          <IonSearchbar id="searchbar" placeholder="Search Location..." />
+          <IonSearchbar
+            id="searchbar"
+            value={searchText}
+            onIonChange={(e) => setSearchText(e.detail.value!)}
+            placeholder="Search Location..."
+          />
         </IonToolbar>
 
         <IonAlert
-        isOpen={showAlert1}
-        onDidDismiss={() => setShowAlert1(false)}
-        header={'Error'}
-        subHeader={'Cannot connect to server'}
-        message={'Unable to connect to the server. Please check your internet connection'}
-        buttons={['OK']}
+          isOpen={showAlert1}
+          onDidDismiss={() => setShowAlert1(false)}
+          header={"Error"}
+          subHeader={"Cannot connect to server"}
+          message={
+            "Unable to connect to the server. Please check your internet connection"
+          }
+          buttons={["OK"]}
         />
 
         <IonGrid>
@@ -112,17 +119,8 @@ const Home: React.FC<RouteComponentProps> = (props) => {
           </IonRow>
 
           <IonRow>
-            <IonCol>
-              <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Total Corona Deaths</IonCardTitle>
-                </IonCardHeader>
 
-                <IonCardContent>{cumDeaths.toLocaleString()}</IonCardContent>
-              </IonCard>
-            </IonCol>
-
-            <IonCol>
+          <IonCol>
               <IonCard id="cards">
                 <IonCardHeader>
                   <IonCardTitle>Daily Corona Deaths</IonCardTitle>
@@ -130,12 +128,24 @@ const Home: React.FC<RouteComponentProps> = (props) => {
                 <IonCardContent>{newDeaths.toLocaleString()}</IonCardContent>
               </IonCard>
             </IonCol>
+
+            <IonCol>
+              <IonCard id="cards">
+                <IonCardHeader>
+                  <IonCardTitle>Total Corona Deaths</IonCardTitle>
+                </IonCardHeader>
+                <IonCardContent>{cumDeaths.toLocaleString()}</IonCardContent>
+              </IonCard>
+            </IonCol>
+
           </IonRow>
 
           <IonRow>
             <IonCol>
               <IonCard id="cards">
-                <IonCardHeader>Placeholder</IonCardHeader>
+                <IonCardHeader>
+                  <IonCardTitle>Placeholder</IonCardTitle>
+                </IonCardHeader>
                 <IonCardContent>987,654</IonCardContent>
               </IonCard>
             </IonCol>
@@ -144,20 +154,22 @@ const Home: React.FC<RouteComponentProps> = (props) => {
           <IonRow>
             <IonCol>
               <IonCard id="cards">
-                <IonItem href="https://www.nhs.uk/conditions/coronavirus-covid-19/"> 
-                  <IonLabel>NHS guidlines</IonLabel>
-                  <IonIcon slot="end" name="information-circle-outline"></IonIcon>
+                <IonItem href="https://www.nhs.uk/conditions/coronavirus-covid-19/">
+                  <IonLabel>NHS Guidelines</IonLabel>
+                  <IonIcon
+                    slot="end"
+                    name="information-circle-outline"
+                  ></IonIcon>
                 </IonItem>
-                <IonItem> 
+                <IonItem>
                   <IonLabel>Almond Milk! But no Nipples?</IonLabel>
                 </IonItem>
-                <IonItem> 
+                <IonItem>
                   <IonLabel>Amazing world of Gumbball</IonLabel>
                 </IonItem>
-                <IonItem> 
+                <IonItem>
                   <IonLabel>cool kids only</IonLabel>
                 </IonItem>
-              
               </IonCard>
             </IonCol>
           </IonRow>
@@ -185,8 +197,7 @@ const Home: React.FC<RouteComponentProps> = (props) => {
           </IonRow>
         </IonGrid>
       </IonContent>
-
-      <IonFooter>
+            <IonFooter>
         <IonToolbar id="footer">
           <IonLabel>Location set to {location}</IonLabel>
         </IonToolbar>
