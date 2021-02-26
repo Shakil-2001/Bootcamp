@@ -20,9 +20,7 @@ class covidAPI {
     },
   };
 
-  apiParams = `filters=${this.filters.join(";")}&structure=${JSON.stringify(
-    this.structure
-  )}`;
+  apiParams = `filters=${this.filters.join(";")}&structure=${JSON.stringify(this.structure)}`;
   encodedParams = encodeURI(this.apiParams);
 
   url = "https://api.coronavirus.data.gov.uk/v1/data";
@@ -35,6 +33,7 @@ class covidAPI {
 }
 
 export default covidAPI;
+
 /*
     const endpoint = `${this.url}?${this.encodedParams}`;
 
