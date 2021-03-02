@@ -1,8 +1,9 @@
 import axios from "axios";
+import { logoLaravel, logoMastodon } from "ionicons/icons";
 
 class newsAPI {
   baseUrl = "https://newsapi.org/v2/everything";
-  apiKey = "dd906e0d01984574bb81ceb9d9225d8c";
+  apiKey = "dfe62e39b22842ce92409246ea949b66";
   query = "coronavirus";
   dates = this.formatDate()
   endpoint = `${this.baseUrl}?q=${this.query}&from=${this.dates}+sortBy=popularity&apiKey=${this.apiKey}`
@@ -21,7 +22,9 @@ class newsAPI {
     return axios(this.endpoint)
   }
 }
+
 export default newsAPI;
+
 
 /*
 'q=Apple&'
