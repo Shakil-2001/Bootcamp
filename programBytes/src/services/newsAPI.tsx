@@ -1,5 +1,5 @@
 import axios from "axios";
-import { logoLaravel, logoMastodon } from "ionicons/icons";
+//import { logoLaravel, logoMastodon } from "ionicons/icons";
 
 class newsAPI {
   baseUrl = "https://newsapi.org/v2/everything";

@@ -16,25 +16,41 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonIcon,
-  IonButton,
+  //IonButton,
   IonItem,
 } from "@ionic/react";
 
-import { RouteComponentProps } from "react-router-dom";
+//import { RouteComponentProps } from "react-router-dom";
 import "./Cases.css";
 import covidAPI from "../services/covidAPI";
 import React from "react";
+import Chart from '../components/Chart.js';
+
 
 const Home: React.FC = () => {
   const [newCases = "", setNewCases] = React.useState(String);
-  const [newCasesArr, setNewCasesArr] = React.useState<any[]>([]);
-  const [cumCasesArr = "", setCumCasesArr] = React.useState<String[]>([]);
+  const [newCasesArr = "", setNewCasesArr] = React.useState<number[]>([]);
+  const [cumCasesArr = "", setCumCasesArr] = React.useState<number[]>([]);
   const [cumCases = "", setCumCases] = React.useState(String); //haha cum lmao
   const [newDeaths = "", setNewDeaths] = React.useState(String);
   const [cumDeaths = "", setCumDeaths] = React.useState(String); ////haha cum again
+
   const [location = "", getLocation] = React.useState(String);
   const [showAlert1, setShowAlert1] = React.useState(false); // alert
   const [searchText, setSearchText] = React.useState("");
+
+
+  /* 
+  If you see .toLocaleString() it basically formats the number to have the comma where ever the thousands are and shit.
+  In the services folder is where the COVID API file is located and contains the data retrieval.
+
+  TODO:
+  - Need to fix the button popping up multiple times
+  - Go global
+  - Figure out how to allow users to see certain areas
+  - Potentially add different tabs with graphs / news
+  - Make it look more vibrant
+  */
 
 
   React.useEffect(() => {
@@ -47,24 +63,30 @@ const Home: React.FC = () => {
         setNewDeaths(result.data.data[0].deaths.daily);
         setCumDeaths(result.data.data[0].deaths.cumulative);
         getLocation(result.data.data[0].name);
-        
+
         result.data.data.forEach((data: any) => {
           setNewCasesArr(old => [...old, data.cases.daily])
-        });                                                                                                                                                                                               
+        });
+
       })
+
       .catch((error) => {
         console.log(error);
         setShowAlert1(true);
-      });
-  },[]);
+      }); 
+
+  }, []);
 
   return (
+
     <IonPage>
       <IonHeader>
         <IonToolbar id="header">
           <IonTitle id="title">COVID Tracker</IonTitle>
         </IonToolbar>
       </IonHeader>
+
+      
 
       <IonContent id="body" fullscreen>
         <IonToolbar id="searchbarCont">
@@ -137,10 +159,9 @@ const Home: React.FC = () => {
           <IonRow>
             <IonCol>
               <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Placeholder</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent>987,654</IonCardContent>
+                <IonCardContent>
+                  <Chart />
+                </IonCardContent>
               </IonCard>
             </IonCol>
           </IonRow>
@@ -200,4 +221,6 @@ const Home: React.FC = () => {
     </IonPage>
   );
 };
+
+
 export default Home;
