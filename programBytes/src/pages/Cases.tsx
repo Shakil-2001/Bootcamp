@@ -27,6 +27,8 @@ import React from "react";
 
 const Home: React.FC = () => {
   const [newCases = "", setNewCases] = React.useState(String);
+  const [newCasesArr, setNewCasesArr] = React.useState<any[]>([]);
+  const [cumCasesArr = "", setCumCasesArr] = React.useState<String[]>([]);
   const [cumCases = "", setCumCases] = React.useState(String); //haha cum lmao
   const [newDeaths = "", setNewDeaths] = React.useState(String);
   const [cumDeaths = "", setCumDeaths] = React.useState(String); ////haha cum again
@@ -34,17 +36,6 @@ const Home: React.FC = () => {
   const [showAlert1, setShowAlert1] = React.useState(false); // alert
   const [searchText, setSearchText] = React.useState("");
 
-  /* 
-  If you see .toLocaleString() it basically formats the number to have the comma where ever the thousands are and shit.
-  In the services folder is where the COVID API file is located and contains the data retrieval.
-
-  TODO:
-  - Need to fix the button popping up multiple times
-  - Go global
-  - Figure out how to allow users to see certain areas
-  - Potentially add different tabs with graphs / news
-  - Make it look more vibrant
-  */
 
   React.useEffect(() => {
     const covid = new covidAPI();
@@ -56,15 +47,18 @@ const Home: React.FC = () => {
         setNewDeaths(result.data.data[0].deaths.daily);
         setCumDeaths(result.data.data[0].deaths.cumulative);
         getLocation(result.data.data[0].name);
+        
+        result.data.data.forEach((data: any) => {
+          setNewCasesArr(old => [...old, data.cases.daily])
+        });                                                                                                                                                                                               
       })
       .catch((error) => {
         console.log(error);
         setShowAlert1(true);
       });
-  });
+  },[]);
 
   return (
-
     <IonPage>
       <IonHeader>
         <IonToolbar id="header">
@@ -102,7 +96,7 @@ const Home: React.FC = () => {
                 </IonCardHeader>
 
                 <IonCardContent id="card1test">
-                  {newCases.toLocaleString()}{" "}
+                  {newCases.toLocaleString()}
                 </IonCardContent>
               </IonCard>
             </IonCol>
@@ -165,7 +159,7 @@ const Home: React.FC = () => {
                   <IonLabel>Almond Milk! But no Nipples?</IonLabel>
                 </IonItem>
                 <IonItem>
-                  <IonLabel>Amazing world of Gumbball</IonLabel>
+                  <IonLabel>Amazing world of Gumball</IonLabel>
                 </IonItem>
                 <IonItem>
                   <IonLabel>cool kids only</IonLabel>

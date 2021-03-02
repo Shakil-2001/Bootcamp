@@ -18,261 +18,57 @@ import {
   IonIcon,
   IonButton,
   IonItem,
+  IonImg,
+  IonCardSubtitle,
 } from "@ionic/react";
-import ExploreContainer from '../components/ExploreContainer';
+import React from "react";
+import ExploreContainer from "../components/ExploreContainer";
+import newsAPI from "../services/newsAPI";
 
 const News: React.FC = () => {
+  const [titles, setTitles] = React.useState<any[]>([]);
+  const [img = "", setImg] = React.useState(String);
+  const [stories, setStories] = React.useState<any[]>([]);
+  const [showAlert1, setShowAlert1] = React.useState(false); // alert
+
+  React.useEffect(() => {
+    const news = new newsAPI();
+    news
+      .getNews()
+      .then((news) => {
+        //console.log(news.data.articles);
+        setStories(news.data.articles);
+      })
+      .catch((error) => {
+        console.log(error);
+        setShowAlert1(true);
+      });
+  }, []);
+
   return (
-      <IonPage>
-        <IonHeader>
-          <IonToolbar id="header">
-            <IonTitle id="title">News</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-  
-        <IonContent fullscreen id="body">
+    <IonPage>
+      <IonHeader>
+        <IonToolbar id="header">
+          <IonTitle id="title">News</IonTitle>
+        </IonToolbar>
+      </IonHeader>
 
-        <IonGrid>
-          <IonRow>
-            <IonCol>
-              <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Daily Corona Cases</IonCardTitle>
-                </IonCardHeader>
+      <IonContent fullscreen id="body">
+        {stories.map((story) => (
 
-                <IonCardContent id="card1test">
-                
-                </IonCardContent>
-              </IonCard>
-            </IonCol>
-
-            <IonCol>
-              <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Total Corona Cases</IonCardTitle>
-                </IonCardHeader>
-
-                <IonCardContent></IonCardContent>
-              </IonCard>
-            </IonCol>
-          </IonRow>
-
-          <IonRow>
-
-          <IonCol>
-              <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Daily Corona Deaths</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent></IonCardContent>
-              </IonCard>
-            </IonCol>
-
-            <IonCol>
-              <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Total Corona Deaths</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent></IonCardContent>
-              </IonCard>
-            </IonCol>
-
-          </IonRow>
-
-          <IonRow>
-            <IonCol>
-              <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Placeholder</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent>987,654</IonCardContent>
-              </IonCard>
-            </IonCol>
-          </IonRow>
-
-          <IonRow>
-            <IonCol>
-              <IonCard id="cards">
-                <IonItem href="https://www.nhs.uk/conditions/coronavirus-covid-19/">
-                  <IonLabel>NHS Guidelines</IonLabel>
-                  <IonIcon
-                    slot="end"
-                    name="information-circle-outline"
-                  ></IonIcon>
-                </IonItem>
-                <IonItem>
-                  <IonLabel>Almond Milk! But no Nipples?</IonLabel>
-                </IonItem>
-                <IonItem>
-                  <IonLabel>Amazing world of Gumbball</IonLabel>
-                </IonItem>
-                <IonItem>
-                  <IonLabel>cool kids only</IonLabel>
-                </IonItem>
-              </IonCard>
-            </IonCol>
-          </IonRow>
-
-          <IonRow>
-            <IonCol>
-              <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Placeholder</IonCardTitle>
-                </IonCardHeader>
-
-                <IonCardContent></IonCardContent>
-              </IonCard>
-            </IonCol>
-
-            <IonCol>
-              <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Placeholder</IonCardTitle>
-                </IonCardHeader>
-
-                <IonCardContent></IonCardContent>
-              </IonCard>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-        </IonContent>
-      </IonPage>
-    );
-  };
+          <IonCard id="cards" key = {story.url} href = {story.url} >
+            <img src={story.urlToImage} />
+            <IonCardHeader>
+              <IonCardSubtitle>{story.description}</IonCardSubtitle>
+              <IonCardSubtitle>Source : {story.source.name}</IonCardSubtitle>
+              <IonCardTitle>{story.title}</IonCardTitle>
+            </IonCardHeader>
+          </IonCard>
+        
+        ))}
+      </IonContent>
+    </IonPage>
+  );
+};
 
 export default News;
-
-/*
-<IonContent id="body" fullscreen>
-        <IonToolbar id="searchbarCont">
-          <IonSearchbar
-            id="searchbar"
-            value={searchText}
-            onIonChange={(e) => setSearchText(e.detail.value!)}
-            placeholder="Search Location..."
-          />
-        </IonToolbar>
-
-        <IonAlert
-          isOpen={showAlert1}
-          onDidDismiss={() => setShowAlert1(false)}
-          header={"Error"}
-          subHeader={"Cannot connect to server"}
-          message={
-            "Unable to connect to the server. Please check your internet connection"
-          }
-          buttons={["OK"]}
-        />
-
-        <IonGrid>
-          <IonRow>
-            <IonCol>
-              <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Daily Corona Cases</IonCardTitle>
-                </IonCardHeader>
-
-                <IonCardContent id="card1test">
-                  {newCases.toLocaleString()}{" "}
-                </IonCardContent>
-              </IonCard>
-            </IonCol>
-
-            <IonCol>
-              <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Total Corona Cases</IonCardTitle>
-                </IonCardHeader>
-
-                <IonCardContent>{cumCases.toLocaleString()}</IonCardContent>
-              </IonCard>
-            </IonCol>
-          </IonRow>
-
-          <IonRow>
-
-          <IonCol>
-              <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Daily Corona Deaths</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent>{newDeaths.toLocaleString()}</IonCardContent>
-              </IonCard>
-            </IonCol>
-
-            <IonCol>
-              <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Total Corona Deaths</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent>{cumDeaths.toLocaleString()}</IonCardContent>
-              </IonCard>
-            </IonCol>
-
-          </IonRow>
-
-          <IonRow>
-            <IonCol>
-              <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Placeholder</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent>987,654</IonCardContent>
-              </IonCard>
-            </IonCol>
-          </IonRow>
-
-          <IonRow>
-            <IonCol>
-              <IonCard id="cards">
-                <IonItem href="https://www.nhs.uk/conditions/coronavirus-covid-19/">
-                  <IonLabel>NHS Guidelines</IonLabel>
-                  <IonIcon
-                    slot="end"
-                    name="information-circle-outline"
-                  ></IonIcon>
-                </IonItem>
-                <IonItem>
-                  <IonLabel>Almond Milk! But no Nipples?</IonLabel>
-                </IonItem>
-                <IonItem>
-                  <IonLabel>Amazing world of Gumbball</IonLabel>
-                </IonItem>
-                <IonItem>
-                  <IonLabel>cool kids only</IonLabel>
-                </IonItem>
-              </IonCard>
-            </IonCol>
-          </IonRow>
-
-          <IonRow>
-            <IonCol>
-              <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Placeholder</IonCardTitle>
-                </IonCardHeader>
-
-                <IonCardContent></IonCardContent>
-              </IonCard>
-            </IonCol>
-
-            <IonCol>
-              <IonCard id="cards">
-                <IonCardHeader>
-                  <IonCardTitle>Placeholder</IonCardTitle>
-                </IonCardHeader>
-
-                <IonCardContent></IonCardContent>
-              </IonCard>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-      </IonContent>
-            <IonFooter>
-        <IonToolbar id="footer">
-          <IonLabel>Location set to {location}</IonLabel>
-        </IonToolbar>
-      </IonFooter>
-
-    </IonPage>
- */
