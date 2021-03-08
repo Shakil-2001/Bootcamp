@@ -21,11 +21,15 @@ import {
 } from "@ionic/react";
 
 //import { RouteComponentProps } from "react-router-dom";
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import "./Cases.css";
 import covidAPI from "../services/covidAPI";
 import React from "react";
-import Chart from '../components/Chart.js';
+import { Bar, Line } from "react-chartjs-2";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper.scss";
 
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 const Home: React.FC = () => {
   const [newCases = "", setNewCases] = React.useState(String);
@@ -39,20 +43,31 @@ const Home: React.FC = () => {
   const [showAlert1, setShowAlert1] = React.useState(false); // alert
   const [searchText, setSearchText] = React.useState("");
 
+  const [options, setOptions] = React.useState();
+  const [weeklyData, setWeeklyData] = React.useState<any>({});
+  const [monthlyData, setMonthlyData] = React.useState<any>({});
+  const [yearlyData, setYearlyData] = React.useState<any>({});
+
+  var yearlyCases: any[] = [];
+  var monthlyCases: any[] = [];
+  var weeklyCases: any[] = [];
+
+  var yearlyDates: any[] = [];
+  var monthlyDates: any[] = [];
+  var weeklyDates: any[] = [];
 
   /* 
   If you see .toLocaleString() it basically formats the number to have the comma where ever the thousands are and shit.
   In the services folder is where the COVID API file is located and contains the data retrieval.
 
   TODO:
-  - Need to fix the button popping up multiple times
   - Go global
   - Figure out how to allow users to see certain areas
-  - Potentially add different tabs with graphs / news
+  - Potentially add different tabs with graphs
   - Make it look more vibrant
   */
 
-
+  ////////////////////////////////////////////////////////
   React.useEffect(() => {
     const covid = new covidAPI();
     covid
@@ -65,28 +80,66 @@ const Home: React.FC = () => {
         getLocation(result.data.data[0].name);
 
         result.data.data.forEach((data: any) => {
-          setNewCasesArr(old => [...old, data.cases.daily])
+          //setNewCasesArr((old) => [...old, data.cases.daily]);
         });
 
+        for (var i = 364; i >= 0; i--) {
+          yearlyCases.push(result.data.data[i].cases.daily);
+          yearlyDates.push(result.data.data[i].date);
+          if (i < 30) {
+            monthlyCases.push(result.data.data[i].cases.daily);
+            monthlyDates.push(result.data.data[i].date);
+          }
+          if (i < 7) {
+            weeklyCases.push(result.data.data[i].cases.daily);
+            weeklyDates.push(result.data.data[i].date);
+          }
+        }
+
+        setWeeklyData({
+          labels: weeklyDates,
+          datasets: [
+            {
+              label: "Daily Cases",
+              data: weeklyCases,
+            },
+          ],
+        });
+
+        setMonthlyData({
+          labels: monthlyDates,
+          datasets: [
+            {
+              label: "Daily Cases",
+              data: monthlyCases,
+            },
+          ],
+        });
+
+        setYearlyData({
+          labels: yearlyDates,
+          datasets: [
+            {
+              label: "Daily Cases",
+              data: yearlyCases,
+            },
+          ],
+        });
       })
 
       .catch((error) => {
         console.log(error);
         setShowAlert1(true);
-      }); 
-
+      });
   }, []);
-
+  //////////////////////////////////////////////////////////////////////
   return (
-
     <IonPage>
       <IonHeader>
         <IonToolbar id="header">
           <IonTitle id="title">COVID Tracker</IonTitle>
         </IonToolbar>
       </IonHeader>
-
-      
 
       <IonContent id="body" fullscreen>
         <IonToolbar id="searchbarCont">
@@ -135,8 +188,7 @@ const Home: React.FC = () => {
           </IonRow>
 
           <IonRow>
-
-          <IonCol>
+            <IonCol>
               <IonCard id="cards">
                 <IonCardHeader>
                   <IonCardTitle>Daily Corona Deaths</IonCardTitle>
@@ -153,16 +205,52 @@ const Home: React.FC = () => {
                 <IonCardContent>{cumDeaths.toLocaleString()}</IonCardContent>
               </IonCard>
             </IonCol>
-
           </IonRow>
 
           <IonRow>
             <IonCol>
-              <IonCard id="cards">
-                <IonCardContent>
-                  <Chart />
-                </IonCardContent>
-              </IonCard>
+              <Swiper
+                spaceBetween={50}
+                slidesPerView={1}
+                navigation
+                pagination={{ clickable: true }}
+                scrollbar={{ draggable: true }}
+              >
+                <SwiperSlide>
+                  <IonCard id="cards">
+                    <IonCardContent>
+                      <IonCardTitle>
+                        Daily Cases Over a 7 Day Period{" "}
+                      </IonCardTitle>
+                      <Line data={weeklyData} />
+                    </IonCardContent>
+                  </IonCard>
+                </SwiperSlide>
+
+                <SwiperSlide>
+                  <IonCard id="cards">
+                    <IonCardContent>
+                      <IonCardTitle>
+                        Daily Cases Over a Monthly Period{" "}
+                      </IonCardTitle>
+                      <Line data={monthlyData} />
+                    </IonCardContent>
+                  </IonCard>
+                </SwiperSlide>
+
+                <SwiperSlide>
+                  <IonCard id="cards">
+                    <IonCardContent>
+                      <IonCardTitle>
+                        Daily Cases Over a Yearly Period{" "}
+                      </IonCardTitle>
+                      <Line data={yearlyData} />
+                    </IonCardContent>
+                  </IonCard>
+                </SwiperSlide>
+
+
+              </Swiper>
             </IonCol>
           </IonRow>
 
@@ -212,15 +300,24 @@ const Home: React.FC = () => {
           </IonRow>
         </IonGrid>
       </IonContent>
-            <IonFooter>
+      <IonFooter>
         <IonToolbar id="footer">
           <IonLabel>Location set to {location}</IonLabel>
         </IonToolbar>
       </IonFooter>
-
     </IonPage>
   );
 };
 
-
 export default Home;
+
+/*
+                  <IonCard id="cards">
+                    <IonCardContent>
+                      <IonCardTitle>
+                        Daily Cases Over a 7 Day Period{" "}
+                      </IonCardTitle>
+                      <Line data={weeklyData} />
+                    </IonCardContent>
+                  </IonCard>
+ */
